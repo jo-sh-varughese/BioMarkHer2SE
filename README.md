@@ -26,6 +26,8 @@
 
 ## 📖 Table of contents
 
+- [Abstract](#-abstract)
+- [Team](#-team)
 - [What is this?](#-what-is-this)
 - [The one rule](#-the-one-rule)
 - [How it fits together](#-how-it-fits-together)
@@ -39,6 +41,32 @@
 - [Contributing](#-contributing)
 - [Documentation map](#-documentation-map)
 - [License](#-license)
+
+<br/>
+
+## 📝 Abstract
+
+Human epidermal growth factor receptor 2 (HER2) status selects breast cancer patients for targeted therapy, and the boundary
+between immunohistochemistry (IHC) scores 0 and 1+ now decides eligibility for newer treatment. BioMarkHER2 is an assistive
+system that measures HER2 staining on IHC images, shows the evidence a pathologist needs, and suggests a pre-score that a
+pathologist always confirms. It uses a stain-aware U-Net, a multi-task ResNet-50 grade model, conformal prediction sets and a
+site safety gate that withholds the pre-score at hospitals that have not validated it. The grade model reaches 92.3 % accuracy
+where it was trained and falls to 40 to 55 % at hospitals it has not seen, which is why the system measures its own reliability.
+It runs on a 4-core CPU in one Docker container, without network access.
+
+<br/>
+
+## 👥 Team
+
+Mar Baselios College of Engineering and Technology (MBCET), Department of Computer Science and Engineering.
+Project guide: Dr. Jesna Mohan.
+
+| Member | Roll number | GitHub | Work on this repository |
+|---|---|---|---|
+| Aiswarya M S | B23CS2111 | [@AISWARYA-2005](https://github.com/AISWARYA-2005) | Unit tests and the test-case table |
+| Johan S Varughese | B23CS2135 | [@jo-sh-varughese](https://github.com/jo-sh-varughese) | CI/CD pipeline and the status badge |
+| Nadeema Jahan | B23CS2146 | [@nadeema-7](https://github.com/nadeema-7) | Project plan: Gantt chart, risk list and Kanban board |
+| Rishika Pratap Jagdale | B23CS2155 | [@Rishika-0](https://github.com/Rishika-0) | Deployment note and README |
 
 <br/>
 
@@ -214,8 +242,8 @@ the three-person task division: **[`PROJECT_PLAN.md`](PROJECT_PLAN.md)**.
 ## ⚡ Quickstart
 
 ```bash
-git clone https://github.com/jo-sh-varughese/biomarkher2-ai.git
-cd biomarkher2-ai
+git clone https://github.com/jo-sh-varughese/BioMarkHer2SE.git
+cd BioMarkHer2SE
 
 python -m venv .venv
 .venv\Scripts\activate                # macOS/Linux: source .venv/bin/activate
