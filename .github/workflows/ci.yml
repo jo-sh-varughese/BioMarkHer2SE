@@ -1,36 +1,43 @@
-name: tests
+name: CI
 
+# Runs on every push and every pull request: installs the dependencies, runs the
+# whole test suite (including the assignment test cases in
+# tests/test_assignment_a2.py) and proves the Docker image builds and starts.
 on:
   push:
   pull_request:
-    branches: [main]
   workflow_dispatch:
 
+# A newer push to the same branch cancels the older run, so the queue stays short.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  pytest:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
+          cache: pip
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          # torch/torchvision are deliberately not in requirements.txt --
-          # installed from the CPU wheel index, same two-step install
-          # CONTRIBUTING.md documents, because this project runs CPU-only by
-          # design (see PROJECT_PLAN.md). torchvision provides the ResNet
-          # encoders models/unet_seg.py imports -- omitting it made every test
-          # that imports models/ fail collection with ModuleNotFoundError,
-          # passing locally only because a dev .venv had it installed by hand.
+          pip install -r requirements.txt pytest
+          # torch/torchvision are deliberately not in requirements.txt: this
+          # project runs CPU-only, so they come from the CPU wheel index
+          # (the same two-step install CONTRIBUTING.md documents).
           pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
-      - name: Run tests
-        run: pytest -q
+      - name: Run the assignment unit tests
+        run: pytest tests/test_assignment_a2.py -v
+
+      - name: Run the whole test suite
+        run: pytest -v
 
   docker:
     # The deployment artifact: build the image from a clean checkout (the React
@@ -39,7 +46,7 @@ jobs:
     # (docs/DEPLOYMENT.md), so the container itself is not started here.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Build image
         run: docker build -t biomarkher2:ci .
