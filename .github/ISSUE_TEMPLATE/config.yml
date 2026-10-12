@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Project documentation
+    url: https://github.com/jo-sh-varughese/BioMarkHer2SE#-documentation-map
+    about: Read the documentation map before opening an issue.
