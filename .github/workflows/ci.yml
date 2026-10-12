@@ -1,12 +1,16 @@
 name: CI
 
-# Runs on every push and every pull request: installs the dependencies, runs the
-# whole test suite (including the assignment test cases in
-# tests/test_assignment_a2.py) and proves the Docker image builds and starts.
+# Runs on every push and every pull request. Three jobs:
+#   unit-tests  the assignment test cases on Python 3.11 and 3.12 (fast feedback)
+#   test        the whole suite with coverage; the run page shows the coverage table
+#   docker      the deployment image builds from a clean checkout and starts
 on:
   push:
   pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 # A newer push to the same branch cancels the older run, so the queue stays short.
 concurrency:
@@ -14,14 +18,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  unit-tests:
+    name: unit-tests (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
     steps:
       - uses: actions/checkout@v5
 
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
           cache: pip
 
       - name: Install dependencies
@@ -36,8 +45,42 @@ jobs:
       - name: Run the assignment unit tests
         run: pytest tests/test_assignment_a2.py -v
 
-      - name: Run the whole test suite
-        run: pytest -v
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest pytest-cov
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Run the whole test suite with coverage
+        run: >
+          pytest -v --junitxml=junit.xml
+          --cov=app --cov=evaluation --cov=preprocessing --cov=models --cov=training --cov=wsi
+          --cov-report=xml --cov-report=term
+
+      - name: Show the coverage table on the run page
+        if: always()
+        run: |
+          echo "## Test coverage" >> "$GITHUB_STEP_SUMMARY"
+          python -m coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Keep the test and coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            junit.xml
+            coverage.xml
 
   docker:
     # The deployment artifact: build the image from a clean checkout (the React
