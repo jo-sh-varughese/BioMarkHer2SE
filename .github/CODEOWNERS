@@ -1,0 +1,12 @@
+# Each area has an owner who is asked to review changes to it.
+# A pull request is reviewed by a member other than its author.
+
+/tests/                        @AISWARYA-2005
+/docs/TEST_CASES.md            @AISWARYA-2005
+/.github/                      @jo-sh-varughese
+/docs/CI_CD.md                 @jo-sh-varughese
+/docs/PROJECT_PLAN.md          @nadeema-7
+/scripts/make_gantt.py         @nadeema-7
+/docs/DEPLOYMENT_NOTE.md       @Rishika-0
+/Dockerfile                    @Rishika-0
+/docker-compose.yml            @Rishika-0

@@ -1,0 +1,26 @@
+name: Task
+description: A piece of pending project work with a clear "done when"
+labels: []
+body:
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this is needed
+      description: The problem or gap this task closes.
+    validations:
+      required: true
+  - type: textarea
+    id: todo
+    attributes:
+      label: To do
+      description: A checklist of the steps.
+      placeholder: "- [ ] First step"
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: How the team will know it is finished.
+    validations:
+      required: true
