@@ -49,6 +49,20 @@ gantt
 | R2 | The college's slides or a pathologist's time arrive late, which delays tasks 3, 4 and 5. | Schedule and external dependency | Medium, high | Send the request in the first week (task 1). Keep a one-week buffer before the report is due. Rehearse the pilot on public datasets in the meantime. |
 | R3 | Patient data is exposed during the pilot. | Legal and security | Low, high | Process images only on the hospital's machine, with no upload to any cloud service. Use pseudonymised case identifiers, HTTPS and account lockout. Agree a short data-sharing note with the department before the pilot starts. |
 
+## Risk matrix
+
+Each risk is scored as likelihood times impact, with Low = 1, Medium = 2 and High = 3 (a score from 1 to 9).
+
+![Risk matrix](risk_matrix.png)
+
+- **R1, score 9 (act first):** accuracy at the college's scanner. It gets the most effort: the site safety gate is already built, and
+  the shadow-mode pilot (task 4) is designed to measure it before any result is used.
+- **R2, score 6:** late slides or pathologist time. The request goes out in the first week (task 1), so the delay shows early.
+- **R3, score 3:** data exposure. Unlikely by design, because images never leave the hospital's machine, but the impact would be
+  high, so the data-sharing note is agreed before the pilot starts.
+
+The matrix is drawn by `scripts/make_risk_matrix.py` from the same three risks.
+
 ## How the board is used
 
 Every task above is a GitHub issue assigned to its owner and placed on the Kanban board in one of three columns:
