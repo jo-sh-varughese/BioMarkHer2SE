@@ -3,14 +3,14 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:182528,100:95531A&height=220&section=header&text=BioMarkHER2&fontSize=64&fontColor=F4E6D5&fontAlignY=36&animation=fadeIn&desc=AI-Assisted%20HER2%20IHC%20Scoring%20%E2%80%94%20Pre-scoring%2C%20Never%20Autonomous&descAlignY=58&descSize=18&descColor=E7EEEE" width="100%"/>
 
 <a href="https://github.com/jo-sh-varughese/biomarkher2-ai">
-  <img src="https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&weight=600&size=20&duration=3000&pause=1200&color=95531A&center=true&vCenter=true&width=820&lines=Quantifying+HER2+staining%2C+not+guessing+at+it.;A+pathologist+always+reviews+and+confirms.;Built+for+Kottayam+Medical+College.;408+tests+enforce+that+promise." alt="typing banner" />
+  <img src="https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&weight=600&size=20&duration=3000&pause=1200&color=95531A&center=true&vCenter=true&width=820&lines=Quantifying+HER2+staining%2C+not+guessing+at+it.;A+pathologist+always+reviews+and+confirms.;Built+for+Kottayam+Medical+College.;562+tests+enforce+that+promise." alt="typing banner" />
 </a>
 
 <br/>
 
 ![Python](https://img.shields.io/badge/python-3.11-3776AB?logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-CPU--only-EE4C2C?logo=pytorch&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-514%20passing-2f6f5e?logo=pytest&logoColor=white)
+![Tests](https://img.shields.io/badge/tests-562%20passing-2f6f5e?logo=pytest&logoColor=white)
 ![Status](https://img.shields.io/badge/status-active%20development-95531A)
 ![Runs on](https://img.shields.io/badge/runs%20on-CPU%20only-5b6b70)
 ![Docker](https://img.shields.io/badge/docker-packaged-2496ED?logo=docker&logoColor=white)
@@ -28,6 +28,7 @@
 
 - [Abstract](#-abstract)
 - [Team](#-team)
+- [How we work](#-how-we-work)
 - [What is this?](#-what-is-this)
 - [The one rule](#-the-one-rule)
 - [How it fits together](#-how-it-fits-together)
@@ -67,6 +68,27 @@ Project guide: Dr. Jesna Mohan.
 | Johan S Varughese | B23CS2135 | [@jo-sh-varughese](https://github.com/jo-sh-varughese) | CI/CD pipeline and the status badge |
 | Nadeema Jahan | B23CS2146 | [@nadeema-7](https://github.com/nadeema-7) | Project plan: Gantt chart, risk list and Kanban board |
 | Rishika Pratap Jagdale | B23CS2155 | [@Rishika-0](https://github.com/Rishika-0) | Deployment note and README |
+
+<br/>
+
+## 🧭 How we work
+
+Every change follows the same path, and each step leaves a record on GitHub.
+
+1. **Issue.** The work is written down as an issue with a *done when*, and assigned to one member.
+2. **Feature branch.** The member works on `feature/<topic>`, never on `main`, and commits in small steps.
+3. **Pull request.** The pull request uses the template, names the issue it closes (`Closes #n`) and says how it was checked.
+4. **Checks.** The CI pipeline must be green: unit tests on Python 3.11 and 3.12, the whole suite with coverage, and the Docker build.
+5. **Review.** Another member reads the diff and approves it. CODEOWNERS names the owner of each area.
+6. **Merge.** The branch is merged, the issue closes by itself and its card on the Kanban board moves to *Done*.
+
+| What | Where |
+|---|---|
+| Work items | [Issues](https://github.com/jo-sh-varughese/BioMarkHer2SE/issues) and the [Kanban board](https://github.com/users/nadeema-7/projects/1) |
+| Plan, Gantt chart and risks | [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) |
+| Test strategy and test cases | [`docs/TEST_STRATEGY.md`](docs/TEST_STRATEGY.md), [`docs/TEST_CASES.md`](docs/TEST_CASES.md) |
+| CI/CD pipeline | [`docs/CI_CD.md`](docs/CI_CD.md) |
+| Deployment | [`docs/DEPLOYMENT_NOTE.md`](docs/DEPLOYMENT_NOTE.md), [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) |
 
 <br/>
 
@@ -235,7 +257,7 @@ the three-person task division: **[`PROJECT_PLAN.md`](PROJECT_PLAN.md)**.
 | Reports | ReportLab (PDF export) |
 | Packaging | Docker + docker-compose |
 | Config | Plain dataclasses + YAML — no Hydra, unknown keys rejected loudly |
-| Tests | pytest — 514 tests, the project's actual specification |
+| Tests | pytest — 562 tests, the project's actual specification |
 
 <br/>
 
@@ -250,7 +272,7 @@ python -m venv .venv
 pip install -r requirements.txt
 pip install torch --index-url https://download.pytorch.org/whl/cpu
 
-pytest -q                             # 514 passed
+pytest -q                             # 562 passed
 
 pip install -e .                      # registers the `biomark` command (one-off)
 biomark
@@ -294,7 +316,7 @@ evaluation/       Phase 4 -- conformal prediction, stain variation, CAP/ASCO map
 app/              the portal backend: analysis, accounts + admin API, PDF export
 configs/          YAML configs -- one file fully describes one run
 scripts/          CLI entry points that call into the packages above
-tests/            514 tests -- the project's actual specification
+tests/            562 tests -- the project's actual specification
 tasks/            self-contained task briefs for the three open workstreams
 artifacts/        everything a run produces (gitignored -- regenerable)
 data/             raw dataset + cached pseudo-label targets (gitignored)
@@ -310,7 +332,7 @@ data/             raw dataset + cached pseudo-label targets (gitignored)
 pytest -q
 ```
 
-514 tests, spanning every phase. A real category of them encodes the
+562 tests, spanning every phase. A real category of them encodes the
 project's framing rules as literal assertions — not just correctness checks
 — specifically so a well-intentioned future edit can't erode them quietly.
 See `IMPLEMENTATION_NOTES.md`'s "Testing philosophy".
