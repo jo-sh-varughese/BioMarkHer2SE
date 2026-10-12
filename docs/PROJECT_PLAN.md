@@ -40,3 +40,21 @@ gantt
     Final report and viva preparation (All)            :t6, 2026-11-11, 18d
     Release v1.0 and handover (Rishika)                :t7, 2026-11-21, 10d
 ```
+
+## Risk list
+
+| ID | Risk | Type | Likelihood and impact | Mitigation |
+|---|---|---|---|---|
+| R1 | Accuracy falls at the college's scanner and stain. Measured accuracy was 40 to 55 % at hospitals the model was not trained on, against 92.3 % where it was trained. | Technical | High, high | The site safety gate hides the pre-score until the site is validated. Calibrate locally with at least 25 labelled cases. Run in shadow mode first, so no result reaches a patient. |
+| R2 | The college's slides or a pathologist's time arrive late, which delays tasks 3, 4 and 5. | Schedule and external dependency | Medium, high | Send the request in the first week (task 1). Keep a one-week buffer before the report is due. Rehearse the pilot on public datasets in the meantime. |
+| R3 | Patient data is exposed during the pilot. | Legal and security | Low, high | Process images only on the hospital's machine, with no upload to any cloud service. Use pseudonymised case identifiers, HTTPS and account lockout. Agree a short data-sharing note with the department before the pilot starts. |
+
+## How the board is used
+
+Every task above is a GitHub issue assigned to its owner and placed on the Kanban board in one of three columns:
+
+- **To Do**: the issue is agreed but not started.
+- **In Progress**: someone is working on it, usually with an open pull request.
+- **Done**: the pull request is merged and the issue is closed.
+
+A pull request that contains `Closes #<number>` closes its issue when it is merged, and the board moves the card to Done.
