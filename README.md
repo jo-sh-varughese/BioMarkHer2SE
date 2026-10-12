@@ -1,3 +1,5 @@
+[![CI](https://github.com/jo-sh-varughese/BioMarkHer2SE/actions/workflows/ci.yml/badge.svg)](https://github.com/jo-sh-varughese/BioMarkHer2SE/actions/workflows/ci.yml)
+
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:182528,100:95531A&height=220&section=header&text=BioMarkHER2&fontSize=64&fontColor=F4E6D5&fontAlignY=36&animation=fadeIn&desc=AI-Assisted%20HER2%20IHC%20Scoring%20%E2%80%94%20Pre-scoring%2C%20Never%20Autonomous&descAlignY=58&descSize=18&descColor=E7EEEE" width="100%"/>
