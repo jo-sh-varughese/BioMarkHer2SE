@@ -38,7 +38,7 @@
 - [What's built](#-whats-built)
 - [Project status](#-project-status)
 - [Tech stack](#-tech-stack)
-- [Quickstart](#-quickstart)
+- [How to run](#-how-to-run)
 - [Project structure](#-project-structure)
 - [Testing](#-testing)
 - [Contributing](#-contributing)
@@ -263,7 +263,7 @@ the three-person task division: **[`PROJECT_PLAN.md`](PROJECT_PLAN.md)**.
 
 <br/>
 
-## ⚡ Quickstart
+## ⚡ How to run
 
 ```bash
 git clone https://github.com/jo-sh-varughese/BioMarkHer2SE.git
